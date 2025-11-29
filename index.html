@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VEC - Vitrinas y Exhibidores Cuauhtémoc</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #D32F2F;
+            --primary-blue: #0D47A1;
+            --accent-yellow: #FFC107;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --gray-bg: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--white);
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            max-width: 100px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #1565C0 0%, #0D47A1 50%, #D32F2F 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 90px 20px 60px;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero .highlight {
+            color: var(--accent-yellow);
+            display: block;
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 35px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: var(--white);
+            padding: 18px 40px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+            animation: fadeInUp 1.2s ease;
+            border: 3px solid var(--white);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+            background: #20bd5a;
+        }
+
+        .btn-whatsapp i {
+            font-size: 1.6rem;
+        }
+
+        /* PROBLEMA/SOLUCIÓN */
+        .problem-solution {
+            padding: 60px 20px;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .problem-box {
+            background: linear-gradient(135deg, #fff5f5, #ffebee);
+            border-left: 5px solid var(--primary-red);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .problem-box h3 {
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .problem-box p {
+            margin: 10px 0;
+            font-size: 1.05rem;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #e3f2fd, #f0f7ff);
+            border-left: 5px solid var(--primary-blue);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .solution-box h3 {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .solution-box p {
+            margin: 10px 0;
+            font-size: 1.05rem;
+        }
+
+        /* PRODUCTOS */
+        .products {
+            padding: 60px 20px;
+            background: var(--gray-bg);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: var(--white);
+            padding: 35px 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-top: 4px solid var(--primary-red);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--primary-blue);
+        }
+
+        /* IMAGEN NEGOCIO */
+        .business-showcase {
+            padding: 60px 20px;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .business-image-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .business-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .image-caption {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
+            color: var(--white);
+            padding: 25px;
+            text-align: center;
+        }
+
+        .image-caption h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .image-caption p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* BENEFICIOS */
+        .benefits {
+            padding: 60px 20px;
+            background: var(--white);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .benefit-card {
+            background: var(--gray-bg);
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-left: 4px solid var(--accent-yellow);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        /* TESTIMONIOS */
+        .testimonials {
+            padding: 60px 20px;
+            background: var(--gray-bg);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-yellow);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .testimonial-business {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .stars {
+            color: var(--accent-yellow);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* CTA FINAL */
+        .cta-final {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1565C0 0%, #0D47A1 50%, #D32F2F 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .cta-final p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* CONTACTO */
+        .contact-info {
+            padding: 50px 20px;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--gray-bg);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: #e8e8e8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-item i {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+        }
+
+        .contact-item a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        /* BOTÓN FLOTANTE */
+        .float-whatsapp {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #25D366;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        /* ANIMACIONES */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .highlight {
+                font-size: 2.3rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .cta-final h2 {
+                font-size: 2rem;
+            }
+
+            .btn-whatsapp {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+
+            .float-whatsapp {
+                width: 55px;
+                height: 55px;
+                font-size: 1.7rem;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .image-caption h3 {
+                font-size: 1.4rem;
+            }
+
+            .image-caption p {
+                font-size: 1rem;
+            }
+
+            .logo {
+                max-width: 80px;
+            }
+
+            header {
+                padding: 8px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 100px 15px 50px;
+            }
+
+            .products-grid,
+            .benefits-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <img src="logo_vec.webp" alt="VEC Logo" class="logo">
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>
+            Exhibe Mejor,
+            <span class="highlight">Vende Más</span>
+        </h1>
+        <p>Vitrinas, exhibidores, mostradores y más para tu negocio en Cuauhtémoc. Productos de calidad que impulsan tus ventas.</p>
+        <a href="https://wa.me/5216253260695?text=Hola%20VEC,%20quiero%20información%20sobre%20sus%20productos" class="btn-whatsapp">
+            <span style="font-size: 1.6rem;">💬</span>
+            Cotizar por WhatsApp
+        </a>
+    </section>
+
+    <!-- PROBLEMA/SOLUCIÓN -->
+    <section class="problem-solution">
+        <div class="container">
+            <div class="problem-box">
+                <h3><span style="font-size: 1.5rem;">⚠️</span> ¿Te pasa esto?</h3>
+                <p>❌ Tus productos están desordenados y no se ven bien</p>
+                <p>❌ Los clientes no pueden ver claramente tu mercancía</p>
+                <p>❌ Tu negocio no proyecta la imagen profesional que merece</p>
+                <p>❌ Pierdes ventas porque tu exhibición no atrae</p>
+            </div>
+
+            <div class="solution-box">
+                <h3><span style="font-size: 1.5rem;">✅</span> La Solución: Exhibición Profesional</h3>
+                <p>✅ Productos organizados y protegidos del polvo</p>
+                <p>✅ Los clientes ven TODO claramente y compran con confianza</p>
+                <p>✅ Tu negocio proyecta profesionalismo y calidad</p>
+                <p>✅ <strong>Aumentas tus ventas con la exhibición correcta</strong></p>
+            </div>
+        </div>
+    </section>
+
+
+ <!-- IMAGEN DEL NEGOCIO -->
+    <section class="business-showcase">
+        <div class="container">
+            <h2 class="section-title">Descubre Nuestra Calidad</h2>
+		<p class="section-subtitle">Ven a visitarnos y comprueba cada detalle por ti mismo.</p>
+            
+            <div class="business-image-container">
+                <img src="VEC_Interior.webp" alt="Interior de VEC - Vitrinas y Exhibidores Cuauhtémoc" class="business-image" loading="lazy">
+                <div class="image-caption">
+                    <h3>📍 Estamos en Cuauhtémoc</h3>
+                    <p>Calle Ojinaga entre 2da y 4ta - Ven a ver nuestros productos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PRODUCTOS -->
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Nuestros Productos</h2>
+            <p class="section-subtitle">Todo lo que necesitas para exhibir profesionalmente</p>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <span style="font-size: 2.5rem;">🏪</span>
+                    </div>
+                    <h3>Vitrinas</h3>
+                    <p>Vitrinas mostrador, de torre y panorámicas para todo tipo de negocio.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">
+                        <span style="font-size: 2.5rem;">📦</span>
+                    </div>
+                    <h3>Exhibidores</h3>
+                    <p>Exhibidores de piso, pared y especializados para productos específicos.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">
+                        <span style="font-size: 2.5rem;">🛒</span>
+                    </div>
+                    <h3>Mostradores</h3>
+                    <p>Mostradores comerciales resistentes y con diseño profesional.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">
+                        <span style="font-size: 2.5rem;">🏬</span>
+                    </div>
+                    <h3>Góndolas</h3>
+                    <p>Góndolas comerciales para maximizar tu espacio de exhibición.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">
+                        <span style="font-size: 2.5rem;">👔</span>
+                    </div>
+                    <h3>Maniquíes</h3>
+                    <p>Maniquíes de alta calidad para exhibición de ropa y accesorios.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">
+                        <span style="font-size: 2.5rem;">📋</span>
+                    </div>
+                    <h3>Anaqueles y Más</h3>
+                    <p>Anaqueles, paneles ranurados y accesorios para organización.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- BENEFICIOS -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">¿Por Qué Elegir VEC?</h2>
+            <p class="section-subtitle">Tu mejor opción en Cuauhtémoc</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <span style="font-size: 3rem;">🏆</span>
+                    </div>
+                    <h3>Calidad Garantizada</h3>
+                    <p>Productos duraderos de alta calidad para uso comercial intenso.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <span style="font-size: 3rem;">💰</span>
+                    </div>
+                    <h3>Precios Justos</h3>
+                    <p>Los mejores precios del mercado sin sacrificar calidad.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <span style="font-size: 3rem;">📍</span>
+                    </div>
+                    <h3>Local y Cercano</h3>
+                    <p>Estamos en Cuauhtémoc. Atención rápida y personalizada.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <span style="font-size: 3rem;">💬</span>
+                    </div>
+                    <h3>Asesoría Experta</h3>
+                    <p>Te ayudamos a elegir lo mejor para tu tipo de negocio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+            <p class="section-subtitle">Negocios reales que aumentaron sus ventas con nuestros productos</p>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Excelente calidad. La vitrina que compré hace 2 años sigue como nueva. Mis clientes ahora ven mejor los productos y eso se nota en las ventas."</p>
+                    <p class="testimonial-author">— Cliente Satisfecho</p>
+                    <p class="testimonial-business">Negocio Local, Centro</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Muy buenos precios y calidad. El mostrador que compré es resistente y se ve muy profesional. Lo recomiendo totalmente."</p>
+                    <p class="testimonial-author">— Dueño de Negocio</p>
+                    <p class="testimonial-business">Comercio Local</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Me atendieron muy bien y me asesoraron para elegir lo correcto. Desde que puse los exhibidores nuevos, mi tienda se ve mucho más ordenada."</p>
+                    <p class="testimonial-author">— Empresaria Local</p>
+                    <p class="testimonial-business">Tienda en Cuauhtémoc</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>¿Listo Para Mejorar Tu Negocio?</h2>
+            <p>Contáctanos por WhatsApp y te ayudamos a encontrar los productos perfectos para tu espacio.</p>
+            <a href="https://wa.me/5216253260695?text=Hola%20VEC,%20quiero%20cotizar%20productos" class="btn-whatsapp">
+                <span style="font-size: 1.6rem;">💬</span>
+                Contactar Ahora
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact-info">
+        <div class="container">
+            <h2 class="section-title">Visítanos o Contáctanos</h2>
+            <div class="contact-details">
+                <a href="https://maps.app.goo.gl/67RfLTkdXwPEjmZ26" target="_blank" rel="noopener" class="contact-item" style="text-decoration: none; color: inherit; cursor: pointer;">
+                    <span style="font-size: 1.8rem;">📍</span>
+                    <span>Calle Ojinaga entre 2da y 4ta, Cuauhtémoc, Chih.</span>
+                </a>
+                <div class="contact-item">
+                    <span style="font-size: 1.8rem;">☎️</span>
+                    <a href="tel:6255903038">625-590-3038</a>
+                </div>
+                <div class="contact-item">
+                    <span style="font-size: 1.8rem;">💬</span>
+                    <a href="https://wa.me/5216253260695">625-326-0695</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p style="font-size: 1.1rem; margin-bottom: 10px;"><strong>VEC - Vitrinas y Exhibidores Cuauhtémoc</strong></p>
+        <p style="opacity: 0.8;">© 2024 VEC. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a href="https://wa.me/5216253260695" class="float-whatsapp" aria-label="Contactar por WhatsApp">
+        <span style="font-size: 2rem;">💬</span>
+    </a>
+
+</body>
+</html>
